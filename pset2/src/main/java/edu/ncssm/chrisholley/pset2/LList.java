@@ -110,6 +110,8 @@ public class LList<T> implements List<T>, Iterable<T> {
 
     @Override
     public boolean add(T t) {
+        assert(walkLL() == this.size);
+
         System.out.println("Add called");
 
         this.size += 1;
@@ -125,6 +127,8 @@ public class LList<T> implements List<T>, Iterable<T> {
         this.tail = node;
         node.setPrev(prev_end);
         prev_end.setNext(this.tail);
+        assert(walkLL() == this.size);
+
         return true;
     }
 
@@ -194,12 +198,15 @@ public class LList<T> implements List<T>, Iterable<T> {
 
     @Override
     public void add(int index, T element) {
-        if (invalidIdx(index)) {
+        assert(walkLL() == this.size);
+
+        // not using invalidIdx bcs index can be equal to size
+        if ((index < 0 || index > this.size)) {
             throw new IndexOutOfBoundsException("");
         }
 
         // adding at the end, can delegate to add() that adds at the end
-        if( this.size == 0  || index == this.size() - 1) {
+        if( this.size == 0  || index == this.size()) {
             this.add(element);
             return;
         }
@@ -223,6 +230,20 @@ public class LList<T> implements List<T>, Iterable<T> {
         LLNode left = cur_node.prev;
         left.next = new_node;
         cur_node.prev = new_node;
+        assert(walkLL() == this.size);
+    }
+
+    private int walkLL() {
+        LLNode cur = this.head;
+        if (cur == null) {
+            return 0;
+        }
+        int total = 0;
+        while (cur.next != null) {
+            total += 1;
+            cur = cur.next;
+        }
+        return total;
     }
 
     @Override
@@ -230,20 +251,44 @@ public class LList<T> implements List<T>, Iterable<T> {
         if (invalidIdx(index)) {
             throw new IndexOutOfBoundsException("");
         }
-        
-        if (index == 0) {
-            
-        } else if (index == this.size - 1) {
-            
-        }
-
         LLNode cur_node = this.head;
         for (int i = 0; i<index; i++) {
             cur_node = cur_node.next;
         }
-        
-        
-        
+
+        T data = cur_node.getData();
+
+        // no guarantees
+        if (index == 0) {
+            // only 1 element
+            if (cur_node.next == null) {
+                this.head = null;
+                this.tail = null;
+
+            } else {
+                cur_node.next.prev = null;
+                this.head = cur_node.next;
+                cur_node.next = null;
+            }
+
+        }
+        // have something on left
+        else if (index == this.size - 1) {
+            this.tail = cur_node.prev;
+            this.tail.next = null;
+            this.tail.prev = cur_node.prev.prev;
+            cur_node.prev = null;
+        }
+        // have nodes on both sides
+        else {
+            cur_node.next.prev = cur_node.prev;
+            cur_node.prev.next = cur_node.next;
+            cur_node.next = null;
+            cur_node.prev = null;
+        }
+        size--;
+        assert(walkLL() == this.size);
+        return data;
     }
 
     @Override
