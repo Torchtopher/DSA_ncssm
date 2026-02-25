@@ -12,19 +12,24 @@ public class LList<T> implements List<T>, Iterable<T> {
     private LLNode tail = null;
     private int size = 0;
 
-    public LList() {
-
-    }
-
     class LLiterator implements Iterator<T> {
 
         private LLNode cur_node = null;
+
+        /***
+         *
+         * @param llist The Linked list that will be iterated over starting at its head object
+         */
         public LLiterator(LList<T> llist) {
             if (llist.head != null) {
                 cur_node = llist.head;
             }
         }
 
+        /***
+         *
+         * @return True if calling next is valid, else false
+         */
         @Override
         public boolean hasNext() {
             if (cur_node != null) {
@@ -33,6 +38,10 @@ public class LList<T> implements List<T>, Iterable<T> {
             return false;
         }
 
+        /***
+         * Advances cur_node by 1 node if it exists
+         * @return The data value held by cur_node when called
+         */
         @Override
         public T next() {
             T data = this.cur_node.getData();
@@ -41,6 +50,10 @@ public class LList<T> implements List<T>, Iterable<T> {
         }
     }
 
+    /***
+     * Private implementation detail for LList class.
+     * Next or prev may be null if element is at the beginning or end
+     */
     class LLNode {
         private LLNode next;
         private LLNode prev;
@@ -75,8 +88,8 @@ public class LList<T> implements List<T>, Iterable<T> {
 
 
     /***
-     *
-     * @return number of elements in the linked list, 0 is empty
+     * Will overflow if more than Interger.MAX_VALUE items are added to the list
+     * @return number of elements in the linked list, 0 is empty.
      */
     @Override
     public int size() {
@@ -93,6 +106,10 @@ public class LList<T> implements List<T>, Iterable<T> {
         throw new UnsupportedOperationException("");
     }
 
+    /***
+     *
+     * @return An iterator for the LList class, going from head to tail
+     */
     @Override
     public Iterator<T> iterator() {
         return new LLiterator(this);
@@ -108,27 +125,28 @@ public class LList<T> implements List<T>, Iterable<T> {
         throw new UnsupportedOperationException("");
     }
 
+    /***
+     *
+     * @param t element to be appended to this list
+     * @return True in all cases
+     */
     @Override
     public boolean add(T t) {
-        assert(walkLL() == this.size);
-
-        System.out.println("Add called");
 
         this.size += 1;
-
         LLNode node = new LLNode(t, null, null);
-        // first element
+
+        // first element, need to set head and tail
         if (this.size == 1) {
             this.head = node;
             this.tail = node;
             return true;
         }
+        // 2+ element, need to set tail only
         LLNode prev_end = this.tail;
         this.tail = node;
         node.setPrev(prev_end);
         prev_end.setNext(this.tail);
-        assert(walkLL() == this.size);
-
         return true;
     }
 
@@ -196,10 +214,13 @@ public class LList<T> implements List<T>, Iterable<T> {
         throw new UnsupportedOperationException("");
     }
 
+    /***
+     * Inserts the element at the index provided, shifting items to the right by 1
+     * @param index index at which the specified element is to be inserted
+     * @param element element to be inserted
+     */
     @Override
     public void add(int index, T element) {
-        assert(walkLL() == this.size);
-
         // not using invalidIdx bcs index can be equal to size
         if ((index < 0 || index > this.size)) {
             throw new IndexOutOfBoundsException("");
@@ -228,24 +249,17 @@ public class LList<T> implements List<T>, Iterable<T> {
             cur_node = cur_node.next;
         }
         LLNode left = cur_node.prev;
+        new_node.setPrev(left);
+        new_node.setNext(cur_node);
         left.next = new_node;
         cur_node.prev = new_node;
-        assert(walkLL() == this.size);
     }
 
-    private int walkLL() {
-        LLNode cur = this.head;
-        if (cur == null) {
-            return 0;
-        }
-        int total = 0;
-        while (cur.next != null) {
-            total += 1;
-            cur = cur.next;
-        }
-        return total;
-    }
-
+    /***
+     *
+     * @param index the index of the element to be removed
+     * @return The value at the removed index
+     */
     @Override
     public T remove(int index) {
         if (invalidIdx(index)) {
@@ -260,7 +274,7 @@ public class LList<T> implements List<T>, Iterable<T> {
 
         // no guarantees
         if (index == 0) {
-            // only 1 element
+            // only 1 element, list will have nothing after this
             if (cur_node.next == null) {
                 this.head = null;
                 this.tail = null;
@@ -287,7 +301,6 @@ public class LList<T> implements List<T>, Iterable<T> {
             cur_node.prev = null;
         }
         size--;
-        assert(walkLL() == this.size);
         return data;
     }
 
