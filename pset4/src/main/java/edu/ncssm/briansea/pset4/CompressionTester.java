@@ -23,8 +23,8 @@ public class CompressionTester extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Compressor compressor = new Compressor();
-        compressor.compress("this is an example of a huffman tree");
-        System.exit(-1);
+//        compressor.compress("this is an example of a huffman tree");
+//        System.exit(-1);
 
         Alert compressChoice = new Alert(Alert.AlertType.CONFIRMATION);
         compressChoice.setTitle("Compress?");

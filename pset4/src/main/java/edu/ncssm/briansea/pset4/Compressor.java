@@ -13,7 +13,27 @@ import java.util.TreeMap;
  * @since Problem Set 4
  * @version 0.0.1
  */
+
+
 public class Compressor {
+
+    private class TreeMapPretty<K, V> extends TreeMap<K,V> {
+
+        @Override
+        public String toString() {
+            String s = super.toString();
+            // regex finds all =[1|0] and replaces with SEP so we don't get confused by ==101010 
+            s = s.replaceAll("=(?=[01])", "SEP")
+                                    .replace("\t", "(tab)")
+                                    .replace("\n", "(enter)")
+                                    .replace("  SEP", " (space)SEP")
+                                    .replace(", ", "\n")
+                                    .replace("SEP", ":");
+            s = s.substring(1, s.length()-1); // remove first and last {, } so it looks identical to large_text-Table.txt
+            return s;
+        }
+    }
+
 
     private class HuffmanNode implements Comparable<HuffmanNode> {
         public String representation = "";
@@ -90,7 +110,7 @@ public class Compressor {
         return null;
     }
 
-    private void LRC(HuffmanNode n, String bit_str, HashMap<Character, String> map) {
+    private void LRC(HuffmanNode n, String bit_str, TreeMap<Character, String> map) {
         if (n == null) { return; }
         if (n.left == null && n.right == null) {
             assert n.representation.length() == 1;
@@ -110,8 +130,8 @@ public class Compressor {
 
     }
 
-    private HashMap<Character, String> createHuffmanTable(HuffmanNode root) {
-        HashMap<Character, String > map = new HashMap<>();
+    private TreeMapPretty<Character, String> createHuffmanTable(HuffmanNode root) {
+        TreeMapPretty<Character, String > map = new TreeMapPretty<>();
 
         LRC(root, new String(), map);
         System.out.println(map);
@@ -140,7 +160,7 @@ public class Compressor {
      */
     public byte[] compress(String str){
         HuffmanNode huffTree = createHuffmanTree(createFreqTable(str));
-        HashMap<Character, String> huffTable = createHuffmanTable(huffTree);
+        TreeMapPretty<Character, String> huffTable = createHuffmanTable(huffTree);
         BitSet bits = new BitSet();
         preOrder(huffTree, bits);
 
