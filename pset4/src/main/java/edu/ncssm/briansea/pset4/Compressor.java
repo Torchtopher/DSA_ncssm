@@ -1,9 +1,5 @@
 package edu.ncssm.briansea.pset4;
 
-import edu.ncssm.briansea.pset4.MinHeap;
-
-import java.util.BitSet;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 /**
@@ -17,6 +13,8 @@ import java.util.TreeMap;
 
 public class Compressor {
 
+    // TreeMap uses natrual ordering which meets lexicalgraphical
+    // changing it's toString to print to match bit for bit large_txt-Table.txt
     private class TreeMapPretty<K, V> extends TreeMap<K,V> {
 
         @Override
@@ -63,23 +61,26 @@ public class Compressor {
         return new String(bytes);
     }
 
-    // - Create the frequency
-    //    table from the input.
+    /**
+     *
+     * @param str, the string to create the frequency table of
+     * @return Map of characters to occurances
+     */
     private TreeMap<Character, Integer> createFreqTable(String str) {
         TreeMap<Character, Integer> map = new TreeMap<>(); // uses natrual ordering of Character
         for (char c : str.toCharArray()) {
             map.put(c, map.getOrDefault(c, 0) + 1);
         }
-        System.out.println(map);
         return map;
     }
 
-    // - Create the Huffman
-    //    Tree from the frequency table. For the initial
-    //    insertion, make sure to do so in lexigraphical
-    //    order!
+    /**
+     *
+     * @param freq_map, map of character to integer
+     * @return root node of the huffman tree
+     */
     private HuffmanNode createHuffmanTree(TreeMap<Character, Integer> freq_map) {
-        MinHeap<HuffmanNode> huffTree = new MinHeap<>();
+        Heap<HuffmanNode> huffTree = new Heap<>();
         for (Map.Entry<Character, Integer> pair : freq_map.entrySet()) {
             System.out.println(pair.getKey() + " " + pair.getValue());
             HuffmanNode n = new HuffmanNode();
@@ -87,17 +88,16 @@ public class Compressor {
             n.representation = String.valueOf(pair.getKey());
             huffTree.add(n);
         }
-        System.out.println(huffTree);
 
         while (true) {
             if (huffTree.peek() == null) {
                 break;
             }
-            HuffmanNode n1 = huffTree.pop();
+            HuffmanNode n1 = huffTree.remove();
             if (huffTree.peek() == null) {
                 return n1; // if only 1 node
             }
-            HuffmanNode n2 = huffTree.pop();
+            HuffmanNode n2 = huffTree.remove();
             HuffmanNode merged_node = new HuffmanNode();
             merged_node.representation = n2.representation + n1.representation;
             merged_node.count = n2.count + n1.count;
@@ -105,11 +105,11 @@ public class Compressor {
             merged_node.right = n2;
             huffTree.add(merged_node);
         }
-        System.out.println(huffTree);
-        assert false;
+
         return null;
     }
 
+    // postorder traversal building bitstring, when reach leaf node store the string in the map
     private void LRC(HuffmanNode n, String bit_str, TreeMap<Character, String> map) {
         if (n == null) { return; }
         if (n.left == null && n.right == null) {
@@ -134,24 +134,11 @@ public class Compressor {
         TreeMapPretty<Character, String > map = new TreeMapPretty<>();
 
         LRC(root, new String(), map);
-        System.out.println(map);
+        System.out.println(map); // can diff this output with expected table
         return map;
     }
 
-    // CLR
-    private void preOrder(HuffmanNode n, BitSet bits) {
-        if (n == null) { return; }
 
-        if (n.left == null && n.right == null) {
-            bits.set(bits.length(), true); // add a 1
-            assert n.representation.length() == 1;
-            char c = n.representation.toCharArray()[0];
-            // 
-            for (int i=0; i<8; i++) {
-
-            }
-        }
-    }
     /**
      * Compresses a string to bytes
      * Uses standard Huffman Compression
@@ -161,9 +148,7 @@ public class Compressor {
     public byte[] compress(String str){
         HuffmanNode huffTree = createHuffmanTree(createFreqTable(str));
         TreeMapPretty<Character, String> huffTable = createHuffmanTable(huffTree);
-        BitSet bits = new BitSet();
-        preOrder(huffTree, bits);
 
-        return bits.toByteArray();
+        return str.getBytes();
     }
 }

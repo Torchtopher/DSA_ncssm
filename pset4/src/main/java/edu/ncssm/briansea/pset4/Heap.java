@@ -1,34 +1,39 @@
 package edu.ncssm.briansea.pset4;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 
-public class MinHeap<T extends Comparable<T>> {
+public class Heap<T extends Comparable<T>> {
 
     private ArrayList<T> heap_arr = new ArrayList<>();
     private Comparator<T> comp = new NaturalOrdering<T>();
 
-    public MinHeap() {
-    }
+    // default constructor does nothing since default comparator is natural ordering of T
+    public Heap() {}
 
-    public MinHeap(Comparator<T> c) {
+    public Heap(Comparator<T> c) {
         this.comp = c;
     }
 
+    /**
+     *
+     * @return The element at the root of the heap, null if empty
+     */
     public T peek() {
         if (heap_arr.size() == 0) { return null; }
         return heap_arr.getFirst();
     }
 
-
+    /**
+     *
+     * @return String representaion of the heap, do not rely on this method for anything
+     */
     public String toString() {
         String out = new String();
         ArrayList<T> heap_arr_copy = new ArrayList<T>(heap_arr);
         if (heap_arr_copy.size() == 0) {
             return "empty";
         }
-        //System.out.println(heap_arr_copy);
         out += heap_arr_copy.get(0) + "\n";
         ArrayList<Integer> children = new ArrayList<>();
         ArrayList<Integer> new_children = new ArrayList<>();
@@ -41,6 +46,7 @@ public class MinHeap<T extends Comparable<T>> {
                 if (c >= heap_arr_copy.size()) {
                     break;
                 }
+                // should use stringbuilder
                 out += " " + heap_arr_copy.get(c);
                 for (int i : childOf(c)) {
                     new_children.add(i);
@@ -53,6 +59,10 @@ public class MinHeap<T extends Comparable<T>> {
         return out;
     }
 
+    /**
+     *
+     * @param elem, adds elem to the MinHeap
+     */
     public void add(T elem) {
         heap_arr.add(elem);
 
@@ -66,10 +76,12 @@ public class MinHeap<T extends Comparable<T>> {
 
     }
 
-    public T pop() {
+    /***
+     *
+     * @return the smallest element in the MinHeap, null if empty
+     */
+    public T remove() {
         if (heap_arr.size() == 0) { return null; }
-
-        System.out.println("Heap arr size " + heap_arr.size());
 
         swap(0, heap_arr.size()-1); // move it to the end
         T removed = heap_arr.remove(heap_arr.size()-1);
@@ -117,11 +129,8 @@ public class MinHeap<T extends Comparable<T>> {
     private void swap(int from, int to) {
         T from_org = heap_arr.get(from);
         T to_org = heap_arr.get(to);
-        System.out.println("Swapping " + from + " to " + to);
-        System.out.println(heap_arr);
         heap_arr.set(from, to_org);
         heap_arr.set(to, from_org);
-        System.out.println(heap_arr);
     }
 
     private int parentOf(int child) {
@@ -129,6 +138,11 @@ public class MinHeap<T extends Comparable<T>> {
         return Math.max(0, ((child - 1) / 2));
     }
 
+    /**
+     *
+     * @param parent, parent index
+     * @return int[2] array, notably will contain both possible child indcies even if one or both are out of bounds
+     */
     private int[] childOf(int parent) {
         return new int[]{parent*2 + 1, parent*2 + 2};
     }
