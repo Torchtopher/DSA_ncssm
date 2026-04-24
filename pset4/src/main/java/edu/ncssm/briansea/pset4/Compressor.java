@@ -20,7 +20,7 @@ public class Compressor {
         @Override
         public String toString() {
             String s = super.toString();
-            // regex finds all =[1|0] and replaces with SEP so we don't get confused by ==101010 
+            // regex finds all =[1|0] and replaces with SEP so we don't get confused by ==101010
             s = s.replaceAll("=(?=[01])", "SEP")
                                     .replace("\t", "(tab)")
                                     .replace("\n", "(enter)")
