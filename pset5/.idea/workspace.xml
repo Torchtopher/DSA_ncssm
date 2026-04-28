@@ -5,50 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="375db303-308a-41f6-9626-a53b2051d1c6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/pset5.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/pset5.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/edu/ncssm/briansea/pset5/BSTTester.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/edu/ncssm/briansea/pset5/BSTree.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/edu/ncssm/briansea/pset5/CompressionTester.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/edu/ncssm/briansea/pset5/Compressor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/edu/ncssm/briansea/pset5/DrawerApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/edu/ncssm/briansea/pset5/DrawingSpace.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/edu/ncssm/briansea/pset5/Drawlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/edu/ncssm/briansea/pset5/Explorer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/edu/ncssm/briansea/pset5/Heap.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/edu/ncssm/briansea/pset5/LList.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/edu/ncssm/briansea/pset5/LineDrawlet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/edu/ncssm/briansea/pset5/LineTool.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/edu/ncssm/briansea/pset5/Tool.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/edu/ncssm/briansea/pset5/WorkSpace.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/java/module-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/resources/data/bstInputData.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/resources/data/large-text-compressed.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/resources/data/large_text-Table.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/resources/data/large_text.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/resources/data/saveTest-Table.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/resources/data/saveTest-compressed.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/resources/data/saveTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/resources/img/add-image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/resources/img/load-work.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/resources/img/save-work.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/resources/img/sort-ascending.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/resources/img/sort-descending.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pset5/src/main/resources/img/sort-none.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/ncssm/chris/pset5/Compressor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ncssm/chris/pset5/Compressor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data/saveTest-compressed.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/saveTest-compressed.dat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,10 +21,10 @@
     <commands />
     <urls />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="3Cmis6cxxZt1z4UB5yG99kJWhKI" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -73,6 +32,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.CompressionTester.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -93,6 +53,26 @@
     "to.speed.mode.migration.done": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="CompressionTester" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="edu.ncssm.chris.pset5.CompressionTester" />
+      <module name="pset5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.ncssm.chris.pset5.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.CompressionTester" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="375db303-308a-41f6-9626-a53b2051d1c6" name="Changes" comment="" />

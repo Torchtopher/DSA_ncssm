@@ -44,6 +44,11 @@ public class Compressor {
         }
 
         HuffNode root = createHuffmanTree(freqTable);
+        HuffNode cur = root;
+        while (cur.left != null) {
+            cur = cur.left;
+        }
+        System.out.println("Max left, is " + cur.symbol);
         HashMap<Character,String> table = createHuffmanTable(root);
 
         for( Character c : table.keySet() ){
@@ -97,9 +102,58 @@ public class Compressor {
         return message;
     }
 
-    private int decodeTree(BitSet encoded, int idx, HuffNode node){
-        // so each 1 means to go left in tree, stored in
+    private void CLR(HuffNode n) {
+        if (n == null) {
+            return;
+        }
+        
+        process();
 
+        left();
+
+        right();
+
+
+    }
+
+    private int decodeTree(BitSet encoded, int idx, HuffNode node){
+        HuffNode cur = node;
+        // so each 1 means to go left in tree, stored in
+        int counter = 0;
+        boolean add_to_cur = false;
+        StringBuilder sb = new StringBuilder();
+        System.out.println(encoded.toString());
+        
+        for (int i = 0; i<=encoded.length(); i++) {
+            boolean bit = encoded.get(i);
+            String bitstr = bit ? "1" : "0";
+            System.out.println("Bit is " + bit);
+
+            if (counter != 0) {
+                sb.append(bitstr);
+                counter--;
+                if (counter == 0) { add_to_cur = true; }
+                System.out.println(sb);
+                continue;
+            }
+
+            if (add_to_cur) {
+                cur.symbol = (char)Integer.parseInt(sb.reverse().toString(), 2);
+                add_to_cur = false;
+                System.out.println("Symbol for first root node " + cur.symbol);
+                // now need to go up one
+            }
+
+            if (i > 15) {
+                break;
+            }
+            if (!bit) {
+                cur.left = new HuffNode();
+                cur = cur.left;
+            } else {
+                counter = 7; // next 8 bits are zero
+            }
+        }
         return 0;
     }
 
